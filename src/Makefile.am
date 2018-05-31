@@ -1,0 +1,4 @@
+SUBDIRS = cli gui
+
+
+CLEANFILES = *~

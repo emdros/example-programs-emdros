@@ -1,0 +1,40 @@
+======= version 1.0.0 =======
+
+2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
+
+	* rmfile.sh: Initial addition.
+
+	* doc/Makefile.am: Remove GNU-Make-isms, thus moving towards
+	better POSIX compliance and greater portability.
+
+2017-12-30  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
+
+	* Add emdros-example-programs.spec.in.
+
+	* Makefile.am: EXTRA_DIST the following files:
+
+	emdros-example-programs.spec.in
+	emdros-example-programs.spec
+
+	* configure.ac: Generate emdros-example-programs.spec from
+	emdros-example-programs.spec.in.
+
+	* src/cli/HAL/Makefile.am: Change the install directory from
+	@prefix@/share/emdros/hal to
+	@prefix@/share/emdros-example-programs/hal
+
+	* src/gui/chunkingtool/Makefile.am: Change the install directory
+	from $(prefix)/share/emdros/chunkingtool to
+	$(prefix)/share/emdros-example-programs/chunkingtool
+
+	* src/gui/chunkingtool/doc/Makefile.am: Change the install
+	directory from $(prefix)/share/emdros/chunkingtool to
+	$(prefix)/share/emdros-example-programs/chunkingtool
+
+	* doc/mqlhal.1.in: Initial addition.
+
+	* doc/hal_build_db.1: Initial addition.
+
+	* doc/Makefile.am: Distribute these new man-files.
+
+

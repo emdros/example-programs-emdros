@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+
+Exec=chunkingtoolu
+Icon=scripturesys-blue-E
+
+Name=Emdros Chunking Tool
+Comment=Divide Emdros databases into indentable chunks
+
+Categories=Education;Languages;

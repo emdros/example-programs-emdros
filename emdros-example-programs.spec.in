@@ -1,0 +1,51 @@
+#
+# emdros-example-programs.spec made from emdros-example-programs.spec.in 
+# via the configure script
+#
+Name:           emdros-example-programs
+Version:        @VERSION@
+Release:        1%{?dist}
+Summary:        Example programs for the Emdros text database engine
+
+License:        GPLv2
+URL:            https://emdros.org/
+Source0:        https://emdros.org/downloads/emdros/emdros-example-programs-%{version}.tar.gz
+
+BuildRequires:  emdros emdros-devel
+Requires:       emdros
+
+%description
+
+Example programs for Emdros, the text database engine for analyzed or
+annotated text. Includes the Emdros Chunking Tool, a GUI tool for
+segmenting interlinear text, and an implementation of the
+Computational Linguistics method called "Hyperspace Analogue to
+Language" (HAL Space).
+
+%prep
+%autosetup
+
+
+%build
+%configure
+%make_build
+
+
+%install
+rm -rf %{buildroot}
+%make_install
+
+
+%files
+%{_bindir}/*
+%{_datadir}/emdros-example-programs/*
+%{_mandir}/man1/*
+
+%license COPYING
+%doc AUTHORS NEWS README ChangeLog INSTALL
+
+
+
+%changelog
+* Sat Dec 30 2017 Ulrik Sandborg-Petersen <ulrikp@scripturesys.com>
+- Initial creation.

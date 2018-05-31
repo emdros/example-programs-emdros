@@ -1,0 +1,4 @@
+SUBDIRS = art chunkingtool
+
+
+CLEANFILES = *~
