@@ -7,4 +7,5 @@ CLEANFILES = *~
 DISTCLEANFILES = emdros-example-programs.spec
 
 EXTRA_DIST = emdros-example-programs.spec.in \
-             emdros-example-programs.spec
+             emdros-example-programs.spec \
+             LICENSE
