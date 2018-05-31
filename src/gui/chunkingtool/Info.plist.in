@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>chunkingtoolu</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Emdros Chunking Tool version @VERSION@, (c) 1999-2006 Ulrik Petersen</string>
+	<string>Emdros Chunking Tool version @VERSION@, (c) 1999-2018 Ulrik Petersen</string>
 	<key>CFBundleIconFile</key>
 	<string>blue-E.icns</string>
 	<key>CFBundleIdentifier</key>
