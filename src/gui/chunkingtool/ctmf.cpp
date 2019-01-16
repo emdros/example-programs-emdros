@@ -8,18 +8,23 @@
  *
  * Ulrik Petersen
  * Created: 4/13-2005
- * Last update: 11/4-2017
+ * Last update: 4/10-2017
  *
  */
-/************************************************************************
+
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2005-2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
+
+
+
 
 #if defined(__GNUG__) && !defined(__APPLE__)
 #pragma implementation "ctmf.h"
@@ -44,29 +49,29 @@
 #include <wx/strconv.h>
 #include <wx/fs_zip.h>
 #include <wx/clipbrd.h>
-
 #include <fstream>
 #include <sstream>
-
-#include <emdros-lconfig.h>
-#include <emdros.h>
-
-#include "conndlg.h"
+#include <wxutil_emdros.h>
+#include <prefix_emdros.h>
+#include <conndlg.h>
 #include "ctmf.h"
 #include "ctwx.h"
-#include "viewmetrics.h"
+#include <monads.h>
+#include <viewmetrics.h>
+#include <mql_execution_environment.h>
+#include <emdf_value.h>
 
 ////@end includes
 
 
 
 ////@begin XPM images
-#include "../art/commit.xpm"
-#include "../art/connect.xpm"
-#include "../art/flash.xpm"
-#include "../art/leftarrow.xpm"
-#include "../art/rightarrow.xpm"
-#include "../art/together.xpm"
+#include <commit.xpm>
+#include <connect.xpm>
+#include <flash.xpm>
+#include <leftarrow.xpm>
+#include <rightarrow.xpm>
+#include <together.xpm>
 ////@end XPM images
 
 
@@ -303,8 +308,6 @@ void WXILLayoutCanvas::InitializeViewMetrics(Configuration *pConf)
 		
 	}
 
-	// TECkit unsupported as of Emdros 4.0.0
-	/*
 	// TECkits...
 	if (pConf != 0) {
 		std::string message;
@@ -312,7 +315,6 @@ void WXILLayoutCanvas::InitializeViewMetrics(Configuration *pConf)
 			wxEmdrosErrorMessage(wxString(wxT("Error: Could not load TECkits...\n")));
 		}
 	}
-	*/
 
 	// Call base class to finish up...
 	LayoutCanvas::InitializeViewMetrics();
@@ -385,7 +387,6 @@ bool loadFile(std::string filename, std::string& outstring, std::string& message
 	return true;
 }
 
-/*
 bool string2encoding(const std::string& encoding_name, unsigned int& output)
 {
 	std::string locase_name;
@@ -404,10 +405,9 @@ bool string2encoding(const std::string& encoding_name, unsigned int& output)
 		return false;
 	}
 }
-*/
 
 
-/*
+
 bool WXILLayoutCanvas::compileTECkits(Configuration *pConf, std::string& message)
 {
 	if (!pConf->has_key("data_feature_teckit_mapping")) {
@@ -545,7 +545,7 @@ std::string WXILLayoutCanvas::applyTECkit(unsigned int feature_index, const std:
 	}
 }
 
-*/
+
 
 
 
@@ -813,7 +813,7 @@ void MainFrame::OnAbout(wxCommandEvent& WXUNUSED(event) )
 {
 	wxString message = wxT("Emdros Chunking Tool version 1.2.0\nfrom Emdros version ");
 	message += wxString(EMDROS_VERSION, wxConvUTF8);
-	message += wxT("\n\nCopyright (C) 2005-2013 Ulrik Sandborg-Petersen\n\nMade available under the GNU General Public License,\nversion 2.  Emdros Chunking Tool comes with NO WARRANTY WHATSOEVER.\n\nSee http://emdros.org/examples/chunkingtool for more information");
+	message += wxT("\n\nCopyright (C) 2005-2013 Ulrik Sandborg-Petersen\n\nMade available under the MIT License.\nEmdros Chunking Tool comes with NO WARRANTY WHATSOEVER.\n\nSee https://emdros.org/examples/chunkingtool for more information");
 	(void)wxMessageBox(message, wxT("About Emdros Chunking Tool"));
 }
 
@@ -961,7 +961,7 @@ void MainFrame::OnFileConnect(wxCommandEvent& event)
 		m_connectionData = conndata;
 		Connect();
 		if (!LoadDocument()) {
-			wxMessageBox(wxString(wxT("Error: Could not load document from database.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+			wxEmdrosErrorMessage(wxString(wxT("Error: Could not load document from database.\n")));
 		} else {
 			// m_pDoc->pretty();
 			UpdateChunkingArea();
@@ -980,7 +980,7 @@ void MainFrame::OnFileCommitToDB(wxCommandEvent& event)
 		if (bDoCommitTransaction) {
 			m_pEE->abortTransaction();
 		}
-		wxMessageBox(wxString(wxT("Error: Could not delete all chunks.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		wxEmdrosErrorMessage(wxString(wxT("Error: Could not delete all chunks.\n")));
 		return;
 	} 
 
@@ -1003,7 +1003,7 @@ void MainFrame::OnFileCommitToDB(wxCommandEvent& event)
 		if (bDoCommitTransaction) {
 			m_pEE->abortTransaction();
 		}
-		wxMessageBox(wxString(wxT("Error: Could not create chunks.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		wxEmdrosErrorMessage(wxString(wxT("Error: Could not create chunks.\n")));
 		return;
 	} 
 
@@ -1075,19 +1075,19 @@ bool MainFrame::LoadDocument()
 	
 	bool bChunkTypeExists;
 	if (!ObjectTypeExists(CHUNK_OT_NAME, bChunkTypeExists)) {
-		wxMessageBox(wxString(wxT("Error: Database error while finding chunk object type.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		wxEmdrosErrorMessage(wxString(wxT("Error: Database error while finding chunk object type.\n")));
 
 		return false;
 	}
 
 	if (!bChunkTypeExists) {
 		if (!CreateChunkType(CHUNK_OT_NAME)) {
-			wxMessageBox(wxString(wxT("Error: Database error while creating chunk object type.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+			wxEmdrosErrorMessage(wxString(wxT("Error: Database error while creating chunk object type.\n")));
 			
 			return false;
 		}
 		if (!DoPreChunking()) {
-			wxMessageBox(wxString(wxT("Warning: Could not do pre-chunking.")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+			wxEmdrosInfoMessage(wxString(wxT("Warning: Could not do pre-chunking.")));
 			// Don't return false... just go on...
 		}
 	}
@@ -1102,7 +1102,7 @@ bool MainFrame::LoadDocument()
 			delete *it;
 		}
 
-		wxMessageBox(wxString(wxT("Error: Could not load data_unit objects.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		wxEmdrosErrorMessage(wxString(wxT("Error: Could not load data_unit objects.\n")));
 		
 		return false;
 	}
@@ -1122,7 +1122,7 @@ bool MainFrame::LoadDocument()
 			delete *it;
 		}
 		
-		wxMessageBox(wxString(wxT("Error: Could not load chunks.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		wxEmdrosErrorMessage(wxString(wxT("Error: Could not load chunks.\n")));
 		return false;
 	}
 
@@ -1141,7 +1141,7 @@ bool MainFrame::DoPreChunking()
 
 		bool bPreChunkingTypeExists;
 		if (!ObjectTypeExists(pre_chunking_unit, bPreChunkingTypeExists)) {
-			wxMessageBox(wxString(wxT("Error: Database error while finding pre-chunking object type.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+			wxEmdrosErrorMessage(wxString(wxT("Error: Database error while finding pre-chunking object type.\n")));
 			
 			return false;
 		}
@@ -1159,13 +1159,13 @@ bool MainFrame::DoPreChunking()
 		// Get flat sheaf
 		FlatSheaf *pFlatSheaf = m_pEE->takeOverFlatSheaf();
 		if (pFlatSheaf == 0) {
-			wxMessageBox(wxString(wxT("Error: Result was not a flat sheaf while getting pre-chunking units.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+			wxEmdrosErrorMessage(wxString(wxT("Error: Result was not a flat sheaf while getting pre-chunking units.\n")));
 			return false;
 		} 
 
 		// Were there no objects?
 		if (pFlatSheaf->isFail()) {
-			wxMessageBox(wxString(wxT("Error: There were no objects of the pre_chunking_unit type.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+			wxEmdrosErrorMessage(wxString(wxT("Error: There were no objects of the pre_chunking_unit type.\n")));
 			delete pFlatSheaf;
 			return false;
 		} else {
@@ -1207,13 +1207,13 @@ bool MainFrame::DoPreChunking()
 			// Get MIN_M and MAX_M
 			monad_m min_m;
 			if (!m_pEE->getMin_m(min_m)) {
-				wxMessageBox(wxString(wxT("Error getting min_m while doing pre-chunking...\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+				wxEmdrosErrorMessage(wxString(wxT("Error getting min_m while doing pre-chunking...\n")));
 				return false;
 			}
 
 			monad_m max_m;
 			if (!m_pEE->getMax_m(max_m)) {
-				wxMessageBox(wxString(wxT("Error getting max_m while doing pre-chunking...\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+				wxEmdrosErrorMessage(wxString(wxT("Error getting max_m while doing pre-chunking...\n")));
 				return false;
 			}
 
@@ -1297,13 +1297,13 @@ bool MainFrame::LoadObjects(objectlist_t& objects)
 	// Get flat sheaf
 	FlatSheaf *pFlatSheaf = m_pEE->takeOverFlatSheaf();
 	if (pFlatSheaf == 0) {
-		wxMessageBox(wxString(wxT("Error: Result was not a flat sheaf while getting data units.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		wxEmdrosErrorMessage(wxString(wxT("Error: Result was not a flat sheaf while getting data units.\n")));
 		return false;
 	} 
 
 	// Were there no objects?
 	if (pFlatSheaf->isFail()) {
-		wxMessageBox(wxString(wxT("Error: There were no objects of the data_unit type.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		wxEmdrosErrorMessage(wxString(wxT("Error: There were no objects of the data_unit type.\n")));
 		delete pFlatSheaf;
 		return false;
 	} else {
@@ -1333,8 +1333,7 @@ bool MainFrame::LoadObjects(objectlist_t& objects)
 				} else {
 					feature = pValue->toString();
 				}
-				// wxString feature_wxstring = wxString(m_pChunkingArea->applyTECkit(i,feature).c_str(), wxConvUTF8);
-				wxString feature_wxstring = wxString(feature.c_str(), wxConvUTF8);				
+				wxString feature_wxstring = wxString(m_pChunkingArea->applyTECkit(i,feature).c_str(), wxConvUTF8);
 				features.push_back(feature_wxstring);
 			}
 			EmdrosObject* pObj = new EmdrosObject(som, features);
@@ -1362,7 +1361,7 @@ bool MainFrame::LoadChunks(chunklist_t& chunks)
 	// Get flat sheaf
 	FlatSheaf *pFlatSheaf = m_pEE->takeOverFlatSheaf();
 	if (pFlatSheaf == 0) {
-		wxMessageBox(wxString(wxT("Error: Result was not a flat sheaf while getting chunks.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		wxEmdrosErrorMessage(wxString(wxT("Error: Result was not a flat sheaf while getting chunks.\n")));
 		return false;
 	} 
 
@@ -1391,7 +1390,7 @@ bool MainFrame::LoadChunks(chunklist_t& chunks)
 			// Get all_m_1
 			SetOfMonads all_m_1;
 			if (!m_pEE->getAll_m_1(all_m_1)) {
-				wxMessageBox(wxString(wxT("Error: Could not get all_m_1 from database.\n")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+				wxEmdrosErrorMessage(wxString(wxT("Error: Could not get all_m_1 from database.\n")));
 				delete pFlatSheaf;
 				return false;
 			}
@@ -1432,7 +1431,7 @@ bool MainFrame::ExecuteEmdrosStatement(std::string query)
 		return false;
 	} else {
 		if (!bCompileResult) {
-			wxMessageBox(wxString(wxT("Error: Compiler error executing this query:\n")) + wxString(query.c_str(), wxConvUTF8), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+			wxEmdrosErrorMessage(wxString(wxT("Error: Compiler error executing this query:\n")) + wxString(query.c_str(), wxConvUTF8));
 			return false;
 		} else {
 			return true;
@@ -1467,7 +1466,7 @@ bool MainFrame::Connect()
 				    &ssout);
 	if (m_pConf == 0) {
 		//(*m_pOut) << ssout.str();
-		wxMessageBox(wxString(wxT("Error: Could not load configuration file:\n")) + m_connectionData.m_strConfiguration, wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+		wxEmdrosErrorMessage(wxString(wxT("Error: Could not load configuration file:\n")) + m_connectionData.m_strConfiguration);
 		return false;
 	} else {
 		wxString strDB;
@@ -1475,14 +1474,14 @@ bool MainFrame::Connect()
 			if (m_pConf->has_key("database")) {
 				strDB = wxString(m_pConf->getValues("database")[0].c_str(), wxConvUTF8);
 			} else {
-				wxMessageBox(wxString(wxT("Error: You must specify a database name,\n")
-						      wxT("either in the connection dialog or in the\n")
-						      wxT("configuration file (with the 'database' key).")), wxT("Error"), wxOK|wxCENTRE|wxICON_ERROR);
+				wxEmdrosErrorMessage(wxString(wxT("Error: You must specify a database name,\n")
+							      wxT("either in the connection dialog or in the\n")
+							      wxT("configuration file (with the 'database' key).")));
 				return false;
 			}
 		} else {
 			strDB = m_connectionData.m_strDatabase;
-			wxMessageBox(wxString(wxT("Successfully connected!")), wxT("Information"), wxOK|wxCENTRE|wxICON_EXCLAMATION);
+			wxEmdrosInfoMessage(wxString(wxT("Successfully connected!")));
 		}
 
 		// Connect    

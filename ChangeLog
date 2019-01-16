@@ -3,7 +3,7 @@
 2019-01-16  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 
 	* src/cli/HAL/: Update the HAL example, with MIT license, from
-	version 3.7.0.pre04 (before removal from that version).
+	Emdros version 3.7.0.pre04 (before removal from that version).
 
 	Files affected:
 
@@ -26,6 +26,10 @@
 	modified:   src/cli/HAL/hallexer.re
 	modified:   src/cli/HAL/mingw.mak
 	modified:   src/cli/HAL/win32.mak
+
+	* src/gui/chunkingtool/: Update the ChunkingTool example, with MIT
+	license, from Emdros version 3.7.0.pre04 (before removal from that
+	version).
 
 2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 

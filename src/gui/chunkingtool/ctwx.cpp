@@ -6,18 +6,20 @@
  *
  * Ulrik Petersen
  * Created: 4/13-2005
- * Last update: 11/4-2017
+ * Last update: 4/18-2018
  *
  */
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2005-2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
+
 
 #if defined(__GNUG__) && !defined(__APPLE__)
 #pragma implementation "ctwx.h"
@@ -28,8 +30,6 @@
 // in which case some systems will fail to use the real 
 // malloc, thus causing build errors.
 #undef malloc
-#include <emdros-lconfig.h>
-#include <emdros.h>
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
@@ -51,15 +51,17 @@
 #include <wx/filename.h>
 #include <wx/splash.h>
 
-#include "conndlg.h"
+#include <emdros-lconfig.h>
+#include <conndlg.h>
+#include <prefix_emdros.h>
 
 ////@end includes
 
 #include "ctwx.h"
 
 ////@begin XPM images
-#include "../art/EmdrosSplashScreen.xpm"
-#include "../art/blue-E.xpm"
+#include <EmdrosSplashScreen.xpm>
+#include "../../wx/blue-E.xpm"
 ////@end XPM images
 
 /*!
@@ -201,24 +203,6 @@ bool EmdrosChunkingToolApp::GetConnection(ConnectionData& conndata)
 	}
 }
 
-std::string app_prefix(void)
-{
-#ifdef __WXMSW__
-	wxString app_path_plus_etc = GetAppPath() + wxT("..\\etc\\chunkingtool\\");
-	return std::string((const char*)app_path_plus_etc.mb_str(wxConvUTF8));
-#elif defined(__WXMAC__)
-	wxString app_path_plus_etc = GetAppPath() + wxT("/../share/emdros/chunkingtool/");
-	return std::string((const char*)app_path_plus_etc.mb_str(wxConvUTF8));
-#else
-	std::string myprefix = "/usr/lib/share/emdros/chunkingtool/";
-	wxString result = wxString(myprefix.c_str(), wxConvUTF8);
-	if (!wxDir::Exists(result)) {
-		result = ::wxGetCwd();
-	}
-	return std::string((const char*)result.mb_str(wxConvUTF8));
-#endif
-}
-
 
 wxString EmdrosChunkingToolApp::wxHelpPrefix(void)
 {
@@ -235,7 +219,7 @@ wxString EmdrosChunkingToolApp::wxHelpPrefix(void)
 	}
 	*/
 #else
-	wxString result = wxString(app_prefix().c_str(), wxConvUTF8);
+	wxString result = wxString(prefix().c_str(), wxConvUTF8) + wxT("share/emdros/chunkingtool/");
 	if (!wxDir::Exists(result)) {
 		result = ::wxGetHomeDir();
 	}
@@ -298,6 +282,23 @@ wxString GetAppPath(void)
 
 
 
+std::string app_prefix(void)
+{
+#ifdef __WXMSW__
+	wxString app_path_plus_etc = GetAppPath() + wxT("..\\etc\\chunkingtool\\");
+	return std::string((const char*)app_path_plus_etc.mb_str(wxConvUTF8));
+#elif defined(__WXMAC__)
+	wxString app_path_plus_etc = GetAppPath() + wxT("/../share/emdros/chunkingtool/");
+	return std::string((const char*)app_path_plus_etc.mb_str(wxConvUTF8));
+#else
+	std::string myprefix = prefix() + "share/emdros/chunkingtool/";
+	wxString result = wxString(myprefix.c_str(), wxConvUTF8);
+	if (!wxDir::Exists(result)) {
+		result = ::wxGetCwd();
+	}
+	return std::string((const char*)result.mb_str(wxConvUTF8));
+#endif
+}
 
 
 

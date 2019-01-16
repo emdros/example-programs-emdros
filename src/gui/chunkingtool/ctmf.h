@@ -6,18 +6,21 @@
  *
  * Ulrik Petersen
  * Created: 4/13-2005
- * Last update: 11/4-2017
+ * Last update: 10/4-2007
  *
  */
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2005-2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
+
+
 
 #ifndef _CTMF_H_
 #define _CTMF_H_
@@ -33,8 +36,8 @@
  */
 
 ////@begin includes
-// #include "TECkit/TECkit_Compiler.h"
-// #include "TECkit/TECkit_Engine.h"
+#include "TECkit/TECkit_Compiler.h"
+#include "TECkit/TECkit_Engine.h"
 
 #include "wx/frame.h"
 #include "wx/toolbar.h"
@@ -43,14 +46,13 @@
 #include "wx/treectrl.h"
 #include "wx/wxhtml.h"
 #include <wx/wizard.h>
-
+#include <emdros_environment.h>
 #include <string>
 #include <map>
-
-#include <emdros.h>
-
-#include "layout.h"
-#include "configwizard.h"
+#include <conf.h>
+#include <layout.h>
+#include <schema.h>
+#include <configwizard.h>
 #include "ctdoc.h"
 
 ////@end includes
@@ -66,7 +68,7 @@ public:
 	ConnectionData() { m_backend_kind = DEFAULT_BACKEND_ENUM; };
 } ConnectionData;
 
-// typedef std::vector<TECkit_Converter> FeatureTECkitTableVec;
+typedef std::vector<TECkit_Converter> FeatureTECkitTableVec;
 
 /*!
  * Forward declarations
@@ -75,7 +77,6 @@ public:
 ////@begin forward declarations
 class MainFrame; 
 ////@end forward declarations
-
 
 class ChunkingToolConfigWizard : public wxWizard {
 public:
@@ -104,8 +105,8 @@ class WXILLayoutCanvas : public LayoutCanvas {
         bool m_bIsRightToLeft;
         unsigned int m_nInterlinearLines;
 	MainFrame *m_pFrame;
-	// FeatureTECkitTableVec m_teckit_vec;
-	// bool m_bHasTECkitTables;
+	FeatureTECkitTableVec m_teckit_vec;
+	bool m_bHasTECkitTables;
 	wxstringvec_t m_strings_for_addition;
  public:
         WXILLayoutCanvas(MainFrame *pParent, const wxPoint& pos, const wxSize& size, const long style, Configuration *pConf);
@@ -116,12 +117,12 @@ class WXILLayoutCanvas : public LayoutCanvas {
 	wxClientDC *GetClientDC(void) { return new wxClientDC(this); };
 	virtual void HandleButtonDown(wxMouseEvent& event, wxPoint point, bool RightButton);
 	bool isRightToLeft() const { return m_bIsRightToLeft; };
-	// std::string applyTECkit(unsigned int feature_index, const std::string& feature_value);
+	std::string applyTECkit(unsigned int feature_index, const std::string& feature_value);
  protected:
 	typedef std::map<monad_m, LayoutBox*> Monad2LayoutBoxMap;
 	Monad2LayoutBoxMap m_box_map;
 	void ClearLayoutBoxMap();
-	// bool compileTECkits(Configuration *pConf, std::string& message);
+	bool compileTECkits(Configuration *pConf, std::string& message);
 	
 };
 

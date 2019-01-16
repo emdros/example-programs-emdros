@@ -9,15 +9,18 @@
  * Last update: 12/16-2005
  *
  */
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2005  Ulrik Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
+
+
 #ifndef _CTWX_H_
 #define _CTWX_H_
 
@@ -85,12 +88,6 @@ public:
 ////@begin declare app
 DECLARE_APP(EmdrosChunkingToolApp)
 ////@end declare app
-
-
-
-
-extern std::string app_prefix();
-
 
 #endif
 // _CTWX_H_
