@@ -8,7 +8,7 @@
  *
  * Ulrik Petersen
  * Created: 4/13-2005
- * Last update: 4/10-2017
+ * Last update: 1/16-2019
  *
  */
 
@@ -309,12 +309,14 @@ void WXILLayoutCanvas::InitializeViewMetrics(Configuration *pConf)
 	}
 
 	// TECkits...
+	/*
 	if (pConf != 0) {
 		std::string message;
 		if (!compileTECkits(pConf, message)) {
 			wxEmdrosErrorMessage(wxString(wxT("Error: Could not load TECkits...\n")));
 		}
 	}
+	*/
 
 	// Call base class to finish up...
 	LayoutCanvas::InitializeViewMetrics();
@@ -387,6 +389,8 @@ bool loadFile(std::string filename, std::string& outstring, std::string& message
 	return true;
 }
 
+/*
+// This was used for the TECkit configuration, but we no longer support TECkit
 bool string2encoding(const std::string& encoding_name, unsigned int& output)
 {
 	std::string locase_name;
@@ -405,9 +409,10 @@ bool string2encoding(const std::string& encoding_name, unsigned int& output)
 		return false;
 	}
 }
+*/
 
 
-
+/*
 bool WXILLayoutCanvas::compileTECkits(Configuration *pConf, std::string& message)
 {
 	if (!pConf->has_key("data_feature_teckit_mapping")) {
@@ -497,6 +502,10 @@ bool WXILLayoutCanvas::compileTECkits(Configuration *pConf, std::string& message
 	}
 }
 
+*/
+
+/*
+
 std::string WXILLayoutCanvas::applyTECkit(unsigned int feature_index, const std::string& feature_value)
 {
 	if (!m_bHasTECkitTables) {
@@ -544,6 +553,7 @@ std::string WXILLayoutCanvas::applyTECkit(unsigned int feature_index, const std:
 		}
 	}
 }
+*/
 
 
 
@@ -1333,7 +1343,9 @@ bool MainFrame::LoadObjects(objectlist_t& objects)
 				} else {
 					feature = pValue->toString();
 				}
-				wxString feature_wxstring = wxString(m_pChunkingArea->applyTECkit(i,feature).c_str(), wxConvUTF8);
+				//wxString feature_wxstring = wxString(m_pChunkingArea->applyTECkit(i,feature).c_str(), wxConvUTF8);
+				wxString feature_wxstring = wxString(feature.c_str(), wxConvUTF8);
+				
 				features.push_back(feature_wxstring);
 			}
 			EmdrosObject* pObj = new EmdrosObject(som, features);

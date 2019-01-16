@@ -6,7 +6,7 @@
  *
  * Ulrik Petersen
  * Created: 4/13-2005
- * Last update: 10/4-2007
+ * Last update: 1/16-2019
  *
  */
 
@@ -36,8 +36,10 @@
  */
 
 ////@begin includes
+/*
 #include "TECkit/TECkit_Compiler.h"
 #include "TECkit/TECkit_Engine.h"
+*/
 
 #include "wx/frame.h"
 #include "wx/toolbar.h"
@@ -68,7 +70,7 @@ public:
 	ConnectionData() { m_backend_kind = DEFAULT_BACKEND_ENUM; };
 } ConnectionData;
 
-typedef std::vector<TECkit_Converter> FeatureTECkitTableVec;
+// typedef std::vector<TECkit_Converter> FeatureTECkitTableVec;
 
 /*!
  * Forward declarations
@@ -105,8 +107,8 @@ class WXILLayoutCanvas : public LayoutCanvas {
         bool m_bIsRightToLeft;
         unsigned int m_nInterlinearLines;
 	MainFrame *m_pFrame;
-	FeatureTECkitTableVec m_teckit_vec;
-	bool m_bHasTECkitTables;
+	// FeatureTECkitTableVec m_teckit_vec;
+	// bool m_bHasTECkitTables;
 	wxstringvec_t m_strings_for_addition;
  public:
         WXILLayoutCanvas(MainFrame *pParent, const wxPoint& pos, const wxSize& size, const long style, Configuration *pConf);
@@ -117,12 +119,12 @@ class WXILLayoutCanvas : public LayoutCanvas {
 	wxClientDC *GetClientDC(void) { return new wxClientDC(this); };
 	virtual void HandleButtonDown(wxMouseEvent& event, wxPoint point, bool RightButton);
 	bool isRightToLeft() const { return m_bIsRightToLeft; };
-	std::string applyTECkit(unsigned int feature_index, const std::string& feature_value);
+	// std::string applyTECkit(unsigned int feature_index, const std::string& feature_value);
  protected:
 	typedef std::map<monad_m, LayoutBox*> Monad2LayoutBoxMap;
 	Monad2LayoutBoxMap m_box_map;
 	void ClearLayoutBoxMap();
-	bool compileTECkits(Configuration *pConf, std::string& message);
+	// bool compileTECkits(Configuration *pConf, std::string& message);
 	
 };
 

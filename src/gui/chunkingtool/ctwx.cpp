@@ -61,7 +61,7 @@
 
 ////@begin XPM images
 #include <EmdrosSplashScreen.xpm>
-#include "../../wx/blue-E.xpm"
+#include <blue-E.xpm>
 ////@end XPM images
 
 /*!

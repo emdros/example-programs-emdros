@@ -41,8 +41,7 @@ PROGRAM_DEPENDENCIES = \
    $(DBLIB) \
    $(BPT_DEPENDENCIES) \
    $(EXTRA_DEPENDENCIES) \
-   $(PCRELIB) \
-   $(OUTDIR)\libteckit.a  \
+   $(PCRELIB) 
 
 
 

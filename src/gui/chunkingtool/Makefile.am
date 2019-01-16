@@ -47,7 +47,7 @@ chunkingtoolu_SOURCES = $(mysrc)
 noinst_HEADERS = $(myhdr)
 
 
-AM_CPPFLAGS = $(EMDROS_CFLAGS) -I.
+AM_CPPFLAGS = $(EMDROS_CFLAGS) -I. -I../art
 CLEANFILES = *~ core config.log Info.plist
 
 EXTRA_DIST = win32.mak mingw.mak ctwx.rc \

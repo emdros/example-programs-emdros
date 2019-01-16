@@ -51,6 +51,18 @@
 	* src/cli/HAL/hallexer.h: Remove obsolete distinction between
 	<istream> and <istream.h>.
 
+	* src/gui/chunkingtool/: Adjust to this directory structure, and
+	the absence of TECkit.
+
+	Files affected:
+
+	modified:   src/gui/chunkingtool/Makefile.am
+	modified:   src/gui/chunkingtool/ctmf.cpp
+	modified:   src/gui/chunkingtool/ctmf.h
+	modified:   src/gui/chunkingtool/ctwx.cpp
+	modified:   src/gui/chunkingtool/mingw.mak
+	modified:   src/gui/chunkingtool/win32.mak
+
 2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 
 	* rmfile.sh: Initial addition.
