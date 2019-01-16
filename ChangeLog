@@ -41,6 +41,7 @@
 	modified:   src/gui/chunkingtool/ctwx.cpp
 	modified:   src/gui/chunkingtool/ctwx.h
 
+	* m4/emdros_wx.m4: Update with the latest from Emdros.
 
 2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 
