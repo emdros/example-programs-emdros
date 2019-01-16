@@ -31,6 +31,17 @@
 	license, from Emdros version 3.7.0.pre04 (before removal from that
 	version).
 
+
+	Files affected:
+
+	modified:   src/gui/chunkingtool/ctdoc.cpp
+	modified:   src/gui/chunkingtool/ctdoc.h
+	modified:   src/gui/chunkingtool/ctmf.cpp
+	modified:   src/gui/chunkingtool/ctmf.h
+	modified:   src/gui/chunkingtool/ctwx.cpp
+	modified:   src/gui/chunkingtool/ctwx.h
+
+
 2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 
 	* rmfile.sh: Initial addition.
