@@ -1,3 +1,5 @@
+*.o
+*.a
 Makefile
 Makefile.in
 aclocal.m4
@@ -67,3 +69,6 @@ src/cli/HAL/doc/config.py
 src/cli/HAL/doc/config.pyc
 src/cli/HAL/doc/dot.gif
 src/cli/HAL/hallexer.cpp
+src/cli/HAL/hal_build_db
+src/cli/HAL/mqlhal
+
