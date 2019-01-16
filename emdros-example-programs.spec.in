@@ -2,11 +2,12 @@
 # emdros-example-programs.spec made from emdros-example-programs.spec.in 
 # via the configure script
 #
+%define prefix       /usr
+
 Name:           emdros-example-programs
 Version:        @VERSION@
 Release:        1%{?dist}
 Summary:        Example programs for the Emdros text database engine
-
 License:        GPLv2
 URL:            https://emdros.org/
 Source0:        https://emdros.org/downloads/emdros/emdros-example-programs-%{version}.tar.gz
@@ -27,7 +28,7 @@ Language" (HAL Space).
 
 
 %build
-%configure
+%configure --prefix=%{prefix}
 %make_build
 
 
@@ -39,6 +40,7 @@ rm -rf %{buildroot}
 %files
 %{_bindir}/*
 %{_datadir}/emdros-example-programs/*
+%{prefix}/share/emdros/hal/hal.cfg
 %{_mandir}/man1/*
 
 %license COPYING

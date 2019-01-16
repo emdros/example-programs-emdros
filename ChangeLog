@@ -65,6 +65,9 @@
 
 	* src/gui/chunkingtool/cfg/wihebrew.cfg: Don't include TECkit variables.
 
+	* emdros-example-programs.spec.in: %define prefix to be /usr, and
+	use it.
+
 2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 
 	* rmfile.sh: Initial addition.
