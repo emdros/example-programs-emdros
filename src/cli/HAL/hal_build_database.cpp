@@ -4,31 +4,38 @@
  * Functions for building HAL db
  *
  * Created: Sometime in the first half of 2003
- * Last update: 11/9-2017
+ * Last update: 3/1-2017
  *
  *******************************************************************/
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2003-2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
 
 
-#include <emdros.h>
 
+#include <emdf_output.h>
+#include <monads.h>
+#include <emdfdb.h>
+#include <emdros_environment.h>
+#include <hal_execution_environment.h>
+#include <hal_defines.h>
+#include <hal_schema.h>
 #include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <fstream>
-
-#include "hal_execution_environment.h"
-#include "hal_defines.h"
-#include "hal_schema.h"
-#include "hal_string_func.h"
+#include <emdros_environment.h>
+#include <hal_string_func.h>
+#include <string_func.h>
+#include <monads.h>
+#include <debug.h>
 
 // Global variables
 HAL_Execution_environment *pHEE = 0;

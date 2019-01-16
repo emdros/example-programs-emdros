@@ -4,8 +4,8 @@ if HOSTISDARWIN
 MACLDFLAGS = -static
 endif
 
-AM_CXXFLAGS = $(EMDROS_CFLAGS) \
-              @SUN_CXXFLAGS@ @DARWIN_CXXFLAGS@ 
+AM_CXXFLAGS = @DEBUGFLAG@ @SUN_CXXFLAGS@ @DARWIN_CXXFLAGS@ \
+              @ADDITIONAL_CXXFLAGS@ 
 
 ARFLAGS = @ARFLAGS@
 
@@ -16,17 +16,27 @@ AM_CPPFLAGS = -I$(srcdir) -I$(top_srcdir)/include
 bin_PROGRAMS = hal_build_db mqlhal
 
 hal_build_db_SOURCES = halblddb.cpp
-hal_build_db_LDADD = -L$(top_builddir)/src/cli/HAL/ -lhal \
-                     $(EMDROS_STATIC_LIBS) @SUN_LDFLAGS@ @DARWIN_LDFLAGS@
+hal_build_db_LDADD = -L$(top_builddir)/examples/HAL/ -lhal \
+                     $(top_builddir)/util/libutil_emdros.la \
+                     $(top_builddir)/MQL/libmql.la @PCRE_LIBADD_SWIG@ \
+                     @EMDFLDADDSWIG@ @SUN_LDFLAGS@  @DARWIN_LDFLAGS@ @ZLIB_LIBADD_SWIG@ 
 hal_build_db_LDFLAGS = $(MACLDFLAGS)
-hal_build_db_DEPENDENCIES = libhal.a
-
+hal_build_db_DEPENDENCIES = libhal.a \
+                            $(top_builddir)/util/libutil_emdros.la \
+                            @EMDFDEPSSWIG@ $(top_builddir)/MQL/libmql.la \
+                            @PCRE_DEP_SWIG@ @ZLIB_DEP_SWIG@
 
 mqlhal_SOURCES = hal.cpp
 mqlhal_LDFLAGS = $(MACLDFLAGS)
-mqlhal_LDADD = -L$(top_builddir)/src/cli/HAL/ -lhal \
-               $(EMDROS_LIBS) @SUN_LDFLAGS@ @DARWIN_LDFLAGS@ -lm
-mqlhal_DEPENDENCIES = libhal.a 
+mqlhal_LDADD = -L$(top_builddir)/examples/HAL -lhal \
+               $(top_builddir)/util/libutil_emdros.la \
+               $(top_builddir)/MQL/libmql.la @PCRE_LIBADD_SWIG@ @EMDFLDADDSWIG@ \
+               @ZLIB_LIBADD_SWIG@ @SUN_LDFLAGS@  @DARWIN_LDFLAGS@ -lm
+mqlhal_DEPENDENCIES = libhal.a \
+                      $(top_builddir)/util/libutil_emdros.la \
+                      @EMDFDEPSSWIG@ $(top_builddir)/MQL/libmql.la \
+                      @PCRE_DEP_SWIG@ @ZLIB_DEP_SWIG@
+
 
 
 
@@ -67,10 +77,10 @@ $(srcdir)/hallexer.cpp: $(srcdir)/hallexer.re \
 	re2c -s -o$@ $(srcdir)/hallexer.re
 
 
-haldir = $(prefix)/share/emdros-example-programs/hal
+haldir = $(prefix)/share/emdros/hal
 dist_hal_DATA = hal.cfg
 
 macdist:
 	cp $(bin_PROGRAMS) $(MACDISTDIR)/development/bin
-	cp $(dist_hal_DATA) $(MACDISTDIR)/development/share/emdros-example-programs/hal
+	cp $(dist_hal_DATA) $(MACDISTDIR)/development/share/emdros/hal
 

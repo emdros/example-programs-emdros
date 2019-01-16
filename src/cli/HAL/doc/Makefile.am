@@ -1,6 +1,6 @@
 DOCUMENT_NAME = HALGuide
 
-DOC_CMS_DIR = ../../../../doc/cms
+PROGREF_DIR = ../../../doc/progref
 
 EXTRA_DIST = Content.txt files.txt config.py.in \
              $(DOCUMENT_NAME).pdf $(DOCUMENT_NAME).tex \
@@ -47,12 +47,12 @@ $(DOCUMENT_NAME).pdf: $(DOCUMENT_NAME).tex
 $(srcdir)/config.py: $(srcdir)/config.py.in
 	$(top_builddir)/config.status --file=$(srcdir)/config.py
 
-$(srcdir)/buildhtb.py: $(srcdir)/$(DOC_CMS_DIR)/buildhtb.py
-	cp $(srcdir)/$(DOC_CMS_DIR)/buildhtb.py $(srcdir)/buildhtb.py 
+$(srcdir)/buildhtb.py: $(srcdir)/$(PROGREF_DIR)/buildhtb.py
+	cp $(srcdir)/$(PROGREF_DIR)/buildhtb.py $(srcdir)/buildhtb.py 
 
-$(srcdir)/cms.css: $(srcdir)/$(DOC_CMS_DIR)/cms.css
-	cp $(srcdir)/$(DOC_CMS_DIR)/cms.css $(srcdir)/cms.css 
+$(srcdir)/cms.css: $(srcdir)/$(PROGREF_DIR)/cms.css
+	cp $(srcdir)/$(PROGREF_DIR)/cms.css $(srcdir)/cms.css 
 
-$(srcdir)/dot.gif: $(srcdir)/$(DOC_CMS_DIR)/dot.gif
-	cp $(srcdir)/$(DOC_CMS_DIR)/dot.gif $(srcdir)/dot.gif 
+$(srcdir)/dot.gif: $(srcdir)/$(PROGREF_DIR)/dot.gif
+	cp $(srcdir)/$(PROGREF_DIR)/dot.gif $(srcdir)/dot.gif 
 

@@ -5,18 +5,21 @@
  *
  * Ulrik Petersen
  * Created: 9/12-2002 (December 9, 2002)
- * Last update: 11/9-2017
+ * Last update: 5/11-2005
  *
  **********************************************************************/
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
+
+
 
 #ifndef _HAL_EXECUTION_ENVIRONMENT__H__
 #define _HAL_EXECUTION_ENVIRONMENT__H__
@@ -24,8 +27,7 @@
 #include <string>
 #include <map>
 #include <iostream>
-
-#include "hallexer.h"
+#include <hallexer.h>
 
 typedef std::map<std::string, int> WordSet_t;
 

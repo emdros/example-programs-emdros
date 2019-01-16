@@ -4,27 +4,29 @@
  * HAL schema string
  *
  * Created: Sometime in the first half of 2003
- * Last update: 11/9-2017
+ * Last update: 11/3-2015
  *
  ************************************************************************/
-/************************************************************************
- *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2017  Ulrik Petersen
- *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
- *
- **************************************************************************/
 
-#include "hal_schema.h"
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
+ *
+ * Licensed under the MIT License.
+ *
+ * Please see the file COPYING in the root of the sources for more details.
+ *
+ */
+
+
+#include <hal_schema.h>
 
 std::string strHALschema = 
   "//\n"
-  "// schema.mql - schema for HAL space\n"
+  "// schema.mql - schema for stem cell research project\n"
   "//\n"
   "// Created: 29/5-2003\n"
-  "// Last update: 11/9-2017\n"
+  "// Last update: 5/7-2003\n"
   "//\n"
   "\n"
   "CREATE ENUMERATION boolean = {\n"

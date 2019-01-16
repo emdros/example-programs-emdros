@@ -5,18 +5,21 @@
  *
  * Ulrik Petersen
  * Created: 6/23-2007
- * Last update: 11/9-2017
+ * Last update: 6/23-2007
  *
  */
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
+
+
 
 /**@file hallexer.h
  *@brief Header file for HALScanner
@@ -26,7 +29,13 @@
 #ifndef HALLEXER__H__
 #define HALLEXER__H__
 
+#include <emdros-lconfig.h>
+
+#if HAVE_ISTREAM
 #include <istream>
+#else
+#include <istream.h>
+#endif
 
 class HAL_Execution_environment; // Forward declaration
 

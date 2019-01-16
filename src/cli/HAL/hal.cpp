@@ -4,7 +4,7 @@
  * A tool to query Emdros databases.
  *
  * Created: 5/1-2001 (1st of May, 2001)
- * Last update: 11/9-2017
+ * Last update: 9/17-2017
  *
  * Return codes:
  * 
@@ -17,15 +17,18 @@
  * 6 : Compiler error
  *
  */
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
+
+
 
 #include <emdros-config.h>
 // Do this because emdros-config might #define malloc,
@@ -34,21 +37,36 @@
 #undef malloc
 
 
-
+#include <monads.h>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <string>
-
-
-#include <emdros.h>
-
+#include <emdfdb.h>
+#include <table.h>
+#include <emdros-lconfig.h>
+#include <emdf_output.h>
+#include <emdros_environment.h>
+#include <encryption.h>
+#include <conf.h>
+#include <prefix_emdros.h>
 #include "HALSpace.h"
+#include <fstream>
+#include <opt.h>
+#include <messages.h>
 
 
 
 #define FIRST_HAL_MONAD    (1000000)  
 
+std::string app_prefix()
+{
+#ifdef WIN32
+	return prefix() + "..\\etc\\hal\\";
+#else
+	return prefix() + "share/emdros/HAL/";
+#endif
+}
 
 int exec(EmdrosEnv *pEE, Configuration *pConf, std::ostream *pOut)
 {
@@ -160,7 +178,7 @@ void print_usage(std::ostream& ostr)
 	ostr << "   -d , --db database   Use this database\n";
 	ostr << "DEFAULTS:\n";
 	ostr << "   -d emdf\n";
-	ostr << "   -c default.cfg" << std::endl;
+	ostr << "   -c " << app_prefix() << "default.cfg" << std::endl;
 	printUsageDefaultsOfStandardArguments(ostr);
 }
 
@@ -195,7 +213,7 @@ int main(int argc, char* argv[])
 	std::string hostname;
 	std::string user;
 	std::string password;
-	std::string configfile("default.cfg");
+	std::string configfile(app_prefix() + "default.cfg");
 	Configuration *pConf;
 	eBackendKind backend_kind;
 	eCharsets dummy_charset;
@@ -204,7 +222,7 @@ int main(int argc, char* argv[])
 			     );
 
 	addOption("-c", "--config", true, 
-		  "default.cfg",
+		  std::string(app_prefix() + "default.cfg").c_str(),
 		  "ERROR: -c and --config must have a filename as their argument.\n"
 		  "       example: -c /home/joe/mygreatdb.cfg\n"
 		  "       example: -c hal.cfg\n");
@@ -263,7 +281,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	pConf = parse_config_file(configfile, "", &std::cout);
+	pConf = parse_config_file(configfile, app_prefix(), &std::cout);
 	if (pConf == 0) {
 		std::cerr << "Error: Could not parse config file '" << configfile << "'." << std::endl;
 		return 1;

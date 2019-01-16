@@ -4,27 +4,32 @@
  * Implementation of a HAL space.
  *
  * Created: 4/12-2005
- * Last update: 11/9-2017
+ * Last update: 7/14-2017
  *
  *******************************************************************/
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2005-2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
+
+
 
 #ifndef HALSPACE__H__
 #define HALSPACE__H__
 
+#include <environment_emdros.h>
+#include <monads.h>
 #include <vector>
 #include <map>
 #include <string>
-
-#include <emdros.h>
+#include <mql_sheaf.h>
+#include <arena.h>
 
 
 typedef std::vector<double> DoubleVec;

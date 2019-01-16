@@ -6,7 +6,7 @@
 # Will build Emdros HAL programs
 
 
-WIN32DIR = ..\..\..\win32
+WIN32DIR = ..\..\win32
 
 include $(WIN32DIR)\config.mak
 
@@ -31,7 +31,6 @@ LIBTARGET_OBJS= \
 
 EMDF_DEPENDENCIES = $(OUTDIR)\libemdf.a
 MQL_DEPENDENCIES = $(OUTDIR)\libmql.a
-SQLITE2_DEPENDENCIES = $(OUTDIR)\libsqlite_emdros.a
 
 ifeq ($(BPT),1)
 BPT_DEPENDENCIES = $(OUTDIR)\libz_emdros.a

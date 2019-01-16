@@ -2,18 +2,19 @@
  * hallexer.re
  *
  * Created: 6/23-2007
- * Last update: 6/23-2007
+ * Last update: 11/30-2018
  *
  *******************************************************************/
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2007  Ulrik Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
 
 
 #define HAL_LEXER
@@ -70,7 +71,7 @@ char *HALScanner::fill(char *cursor)
 {
         if(!eof)
         {
-                unsigned int cnt = tok - bot;
+                std::streamsize cnt = tok - bot;
                 if(cnt)
                 {
                         memcpy(bot, tok, lim - tok);

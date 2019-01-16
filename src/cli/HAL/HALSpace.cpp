@@ -4,27 +4,32 @@
  * Implementation of a HAL space.
  *
  * Created: 4/12-2005
- * Last update: 11/9-2017
+ * Last update: 7/14-2017
  *
  *******************************************************************/
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2005-2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
+
 
 
 enum {WORDS = 0, CELLS=1 };
 
 #include <cmath>
-#include <algorithm>
-#include <iostream>
 
 #include "HALSpace.h"
+#include <emdf_value.h>
+#include <emdf_exception.h>
+#include <string_func.h>
+#include <algorithm>
+#include <iostream>
 
 ///////////////////////////////////////////////////////////
 //
@@ -1120,7 +1125,7 @@ void HALSpace::write_word_vectors(const StringVec& words,
 	(*pOut) << "factor = " << long2string(factor) << std::endl;
 	(*pOut) << "max_values= " << long2string(max_values) << std::endl;
 	(*pOut) << "words = " << std::endl;
-	unsigned int i;
+	StringVec::size_type i;
 	for (i = 0;
 	     i < words.size();
 	     ++i) {
@@ -1147,9 +1152,9 @@ void HALSpace::write_word_vector(const std::string& word,
 		(*pOut) << word << " = [\n";
 		MyTripleVec mytriplevec;
 		get_word_vector(word, row_index, factor, text_length, max_values, mytriplevec);
-		unsigned int vecsize = mytriplevec.size();
-		unsigned int mymin = (vecsize < max_values) ? vecsize : max_values;
-		for (unsigned int word_index = 0;
+		MyTripleVec::size_type vecsize = mytriplevec.size();
+		MyTripleVec::size_type mymin = (vecsize < max_values) ? vecsize : max_values;
+		for (MyTripleVec::size_type word_index = 0;
 		     word_index < mymin;
 		     ++word_index) {
 			char szBuf[1024];
@@ -1213,7 +1218,7 @@ void HALSpace::writeCXT(std::ostream *pOut, const StringVec& words, int threshol
 	std::list<int> rows_to_print;
 	std::set<std::string> word_set;
 
-	for (unsigned int index = 0; index < words.size(); index++) {
+	for (StringVec::size_type index = 0; index < words.size(); index++) {
 		word_set.insert(words[index]);
 	}
 	

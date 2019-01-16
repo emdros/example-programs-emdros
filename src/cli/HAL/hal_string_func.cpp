@@ -5,31 +5,30 @@
  *
  * Ulrik Petersen
  * Created: 3/1-2001
- * Last update: 11/9-2017
+ * Last update: 3/1-2017
  *
  */
-/************************************************************************
+
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
  *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2017  Ulrik Sandborg-Petersen
+ * Licensed under the MIT License.
  *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
+ * Please see the file COPYING in the root of the sources for more details.
  *
- **************************************************************************/
+ */
 
 
-#include "hal_string_func.h"
 
-#include <emdros.h>
-
-
+#include <hal_string_func.h>
 #include <cstdlib>
 #include <cstdio>
 #include <cctype>
 #include <cstring>
 #include <sstream>
 #include <iostream>
+#include <string_func.h>
 
 bool hal_is_other_than_whitespace(const std::string& str)
 {

@@ -1,5 +1,32 @@
 ======= version 1.0.0 =======
 
+2019-01-16  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
+
+	* src/cli/HAL/: Update the HAL example, with MIT license, from
+	version 3.7.0.pre04 (before removal from that version).
+
+	Files affected:
+
+	modified:   src/cli/HAL/HALSpace.cpp
+	modified:   src/cli/HAL/HALSpace.h
+	modified:   src/cli/HAL/Makefile.am
+	modified:   src/cli/HAL/doc/Makefile.am
+	modified:   src/cli/HAL/hal.cpp
+	modified:   src/cli/HAL/hal_build_database.cpp
+	modified:   src/cli/HAL/hal_build_database.h
+	modified:   src/cli/HAL/hal_defines.h
+	modified:   src/cli/HAL/hal_execution_environment.cpp
+	modified:   src/cli/HAL/hal_execution_environment.h
+	modified:   src/cli/HAL/hal_schema.cpp
+	modified:   src/cli/HAL/hal_schema.h
+	modified:   src/cli/HAL/hal_string_func.cpp
+	modified:   src/cli/HAL/hal_string_func.h
+	modified:   src/cli/HAL/halblddb.cpp
+	modified:   src/cli/HAL/hallexer.h
+	modified:   src/cli/HAL/hallexer.re
+	modified:   src/cli/HAL/mingw.mak
+	modified:   src/cli/HAL/win32.mak
+
 2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 
 	* rmfile.sh: Initial addition.

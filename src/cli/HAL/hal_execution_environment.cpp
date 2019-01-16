@@ -5,25 +5,25 @@
  *
  * Ulrik Petersen
  * Created: 9/12-2002 (December 9, 2002)
- * Last update: 11/9-2017
+ * Last update: 3/1-2017
  *
  **********************************************************************/
-/************************************************************************
- *
- *   Emdros - the database engine for analyzed or annotated text
- *   Copyright (C) 2001-2017  Ulrik Sandborg-Petersen
- *
- *   See the file LICENSE in the root of the sources for copyright
- *   information.
- *
- **************************************************************************/
 
-#include <emdros.h>
+/*
+ * Copyright (C) 2001-2018     Ulrik Sandborg-Petersen
+ * Copyright (C) 2018-present  Sandborg-Petersen Holding ApS, Denmark
+ *
+ * Licensed under the MIT License.
+ *
+ * Please see the file COPYING in the root of the sources for more details.
+ *
+ */
 
+
+#include <hal_execution_environment.h>
+#include <string_func.h>
+#include <hal_string_func.h>
 #include <cstring>
-
-#include "hal_execution_environment.h"
-#include "hal_string_func.h"
 
 HAL_Execution_environment::HAL_Execution_environment(std::istream *pIStream, std::ostream *pOStream) 
 {
