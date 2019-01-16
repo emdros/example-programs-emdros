@@ -48,6 +48,9 @@
 
 	* src/cli/HAL/Makefile.am: Adjust to this directory structure.
 
+	* src/cli/HAL/hallexer.h: Remove obsolete distinction between
+	<istream> and <istream.h>.
+
 2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 
 	* rmfile.sh: Initial addition.
