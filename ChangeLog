@@ -43,6 +43,9 @@
 
 	* m4/emdros_wx.m4: Update with the latest from Emdros.
 
+	* src/cli/HAL/doc/Makefile.am: Work with the directory
+	structure in this repo again.
+
 2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 
 	* rmfile.sh: Initial addition.
