@@ -4,38 +4,37 @@ if HOSTISDARWIN
 MACLDFLAGS = -static
 endif
 
-AM_CXXFLAGS = @DEBUGFLAG@ @SUN_CXXFLAGS@ @DARWIN_CXXFLAGS@ \
-              @ADDITIONAL_CXXFLAGS@ 
+AM_CXXFLAGS = @SUN_CXXFLAGS@ @DARWIN_CXXFLAGS@ 
 
 ARFLAGS = @ARFLAGS@
 
 EXTRA_DIST = win32.mak mingw.mak hal.cfg hallexer.re
 
-AM_CPPFLAGS = -I$(srcdir) -I$(top_srcdir)/include
+AM_CPPFLAGS = $(EMDROS_CFLAGS) -I.
+
 
 bin_PROGRAMS = hal_build_db mqlhal
 
+ALWAYSLDADD = $(EMDROS_LIBS) @SUN_LDFLAGS@  @DARWIN_LDFLAGS@ 
+
+
+ALWAYSDEPS = 
+
 hal_build_db_SOURCES = halblddb.cpp
-hal_build_db_LDADD = -L$(top_builddir)/examples/HAL/ -lhal \
-                     $(top_builddir)/util/libutil_emdros.la \
-                     $(top_builddir)/MQL/libmql.la @PCRE_LIBADD_SWIG@ \
-                     @EMDFLDADDSWIG@ @SUN_LDFLAGS@  @DARWIN_LDFLAGS@ @ZLIB_LIBADD_SWIG@ 
+hal_build_db_LDADD = -L$(builddir) -lhal \
+                     $(ALWAYSLDADD) -lemdrosguiu 
 hal_build_db_LDFLAGS = $(MACLDFLAGS)
 hal_build_db_DEPENDENCIES = libhal.a \
-                            $(top_builddir)/util/libutil_emdros.la \
-                            @EMDFDEPSSWIG@ $(top_builddir)/MQL/libmql.la \
-                            @PCRE_DEP_SWIG@ @ZLIB_DEP_SWIG@
+                            $(ALWAYSDEPS)
 
 mqlhal_SOURCES = hal.cpp
 mqlhal_LDFLAGS = $(MACLDFLAGS)
-mqlhal_LDADD = -L$(top_builddir)/examples/HAL -lhal \
-               $(top_builddir)/util/libutil_emdros.la \
-               $(top_builddir)/MQL/libmql.la @PCRE_LIBADD_SWIG@ @EMDFLDADDSWIG@ \
-               @ZLIB_LIBADD_SWIG@ @SUN_LDFLAGS@  @DARWIN_LDFLAGS@ -lm
+mqlhal_LDADD = -L$(builddir) -lhal \
+               $(ALWAYSLDADD) -lemdrosguiu 
+
 mqlhal_DEPENDENCIES = libhal.a \
-                      $(top_builddir)/util/libutil_emdros.la \
-                      @EMDFDEPSSWIG@ $(top_builddir)/MQL/libmql.la \
-                      @PCRE_DEP_SWIG@ @ZLIB_DEP_SWIG@
+                      $(ALWAYSDEPS)
+
 
 
 

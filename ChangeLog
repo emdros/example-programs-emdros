@@ -46,6 +46,8 @@
 	* src/cli/HAL/doc/Makefile.am: Work with the directory
 	structure in this repo again.
 
+	* src/cli/HAL/Makefile.am: Adjust to this directory structure.
+
 2018-05-31  Ulrik Sandborg-Petersen  <ulrikp@scripturesys.com>
 
 	* rmfile.sh: Initial addition.
